@@ -1,7 +1,7 @@
 !(function() {
   'use strict';
-  
-  function LazyComponents($window, $q) {
+   
+  function ComponentLoader($window, $q) {
   
     var self = this;
 
@@ -73,7 +73,7 @@
         d.reject(component);
       });
 
-      window.setTimeout(function() {
+      $window.setTimeout(function() {
         if (component.pending) {
           throw new Error('Component ' + component.name + ' did not load in time.');
         }
@@ -83,7 +83,7 @@
     }
   }
   
-  LazyComponents.$inject = ['$window', '$q'];
+  ComponentLoader.$inject = ['$window', '$q'];
   
-  angular.module('crimp', []).service('lazyComponents', LazyComponents);
+  angular.module('lazy.components', ['ng']).service('componentLoader', ComponentLoader);
 })();
